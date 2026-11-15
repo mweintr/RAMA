@@ -105,13 +105,11 @@ The atomic commands (below) remain available for authors who want to control the
 
 | Command | What it does |
 |---|---|
-| `/ghost-writer:graph` | Sync now (normally automatic) — characters, places, objects, concepts, terms, events (types per preset), linked to each other and to the line of the chapter they come from |
+| `/ghost-writer:graph` | Sync now (normally automatic) |
 | `/ghost-writer:graph check` | Which chapters are waiting, suspended or aligned |
 | `/ghost-writer:graph find [name]` | Show the card for a name |
 
-The graph feeds itself. Only chapters with `status: complete` enter it; integrate, revise, corrections, retune, chapter and review end with a sync when they complete a chapter or change the version of a complete one, and session-start, resume and status catch anything edited by hand. A new version costs no re-read: `graph.py` diffs the text against the analyzed copy, re-anchors every source by its quote (`c3:19` + a short exact excerpt) and hands Claude only the changed paragraphs and the sources whose quote disappeared. Nothing enters a card that the chapters don't say; gaps go in `not_said`, doubts in `open`. Revise, consistency-check, character-check and write read the pertinent cards instead of re-reading chapters.
-
-`python3 graph.py migrate grafo/` converts a graph in the earlier Italian format (`schede/`, `capitoli.yaml`), deriving quotes from the cited lines and listing the ones it cannot convert. Requires `pip install pyyaml`.
+See [Book Graph](#book-graph) below. Requires `pip install pyyaml`.
 
 ### Re-reading away from the computer
 
@@ -174,6 +172,7 @@ demolish-persona hostile-reader → does the argument hold under pressure?
 integrate                       → incorporates all responses, one change at a time
 revise [file]                   → grammar, punctuation, timeline, character details, continuity
   → chapter complete ✅
+  → graph sync (automatic)       → new cards / re-anchored sources, one-line report
 
 EVERY 3-4 CHAPTERS
 ─────────────────────────────────────
@@ -200,14 +199,14 @@ manuscript-final      → arc audit + optional process note + assembled manuscri
 
 Selected during `setup-book`. Adapts vocabulary, questions, and demolition logic.
 
-| Preset | Central concept | Demolition focus |
-|---|---|---|
-| `essay` | Thesis | Falsifiability, circularity, scope |
-| `fiction` | Dramatic question | Motivation, consequence, earned change |
-| `manual` | Transformation | Evidence, context dependency, prerequisites |
-| `biography` | Interpretation | Evidence, selection bias, alternative readings |
-| `fable` | The moral | Earned ending, displacement, narrative necessity |
-| `childrens-book` | The heart | Age appropriateness, child logic, pacing, read-aloud quality |
+| Preset | Central concept | Demolition focus | Graph cards |
+|---|---|---|---|
+| `essay` | Thesis | Falsifiability, circularity, scope | concepts, terms, theses, sources, people |
+| `fiction` | Dramatic question | Motivation, consequence, earned change | characters, organizations, objects, places, concepts, terms, events |
+| `manual` | Transformation | Evidence, context dependency, prerequisites | concepts, terms, procedures, tools, sources |
+| `biography` | Interpretation | Evidence, selection bias, alternative readings | people, organizations, places, objects, events, sources, terms |
+| `fable` | The moral | Earned ending, displacement, narrative necessity | characters, places, objects, events, concepts |
+| `childrens-book` | The heart | Age appropriateness, child logic, pacing, read-aloud quality | characters, places, objects, events, terms |
 
 ---
 
@@ -229,15 +228,71 @@ Custom personas: copy `personas/custom-template.md` and fill in.
 
 ---
 
+## Book Graph
+
+A map of everything that exists in the book — for fiction: characters, organizations, objects, places, concepts (rules, procedures, habits), terms (the glossary) and events, linked to each other and to the line of the chapter they come from. Card types depend on the preset (table above). Skill: `/ghost-writer:graph`; script: `graph.py`.
+
+**It feeds itself — you never run it by hand.**
+
+- Only chapters with `status: complete` enter the graph. Drafts are never analyzed, even when their version changes.
+- The trigger is the chapter `version`: for each complete chapter, `graph.py check` compares the frontmatter version with the version analyzed in the graph. No hooks, no file watchers.
+- The graph is born when the first chapter becomes `complete`.
+- integrate, revise, corrections, retune, chapter and review end with a sync when they complete a chapter or change the version of a complete one. session-start, resume and status run `check` as a safety net (e.g. a chapter edited by hand and re-versioned).
+- A chapter that goes back in progress is **suspended**: its cards stay at the analyzed version until it is `complete` again.
+- No confirmation is asked: the graph is derived. Each sync ends with one line, e.g. *Graph synced (c4 v2.1): 3 new cards, 5 modified, 0 removed, 12 sources re-anchored · open questions: +2, 14 total.*
+
+**A new version costs no re-read.** Every source is `c3:19` (chapter 3, line 19) plus a short exact quote. `graph.py` keeps a copy of the analyzed text, diffs it against the new one, finds each quote again and re-anchors the sources that moved. Claude reads only the changed paragraphs and the cards whose quote disappeared; facts the text no longer says are removed from the cards.
+
+**Rules.** Nothing enters a card that the chapters don't say — not from the outline, not from book-memory. What the text doesn't say goes in `not_said`, doubts in `open`. Only `graph/cards/` is edited; views, index and JSON are regenerated. The script stops (and rolls back a commit) on non-existent ids, malformed sources, quotes not found at their line, or sources citing a chapter that is not analyzed.
+
+**Who reads it.** revise, consistency-check, character-check and write read only the pertinent cards (`graph.py find <name>`, `graph.py find --chapter N`) instead of re-reading chapters. Never the whole graph.
+
+```
+graph/
+  cards/<type>/<id>.yaml    the only files to edit
+  view/…, INDEX.md          readable cards, backlinks, event chain per chapter (generated)
+  graph.json                nodes + edges (generated)
+  chapters.yaml             analyzed chapters and versions (generated)
+  snapshots/cNN.md          analyzed text, for diffs (generated)
+```
+
+A card entry:
+
+```yaml
+traits:
+  - {text: "Climbs the lighthouse at six every morning", source: "c1:8", quote: "alle sei del mattino, come ogni giorno"}
+```
+
+| Command | What it does |
+|---|---|
+| `python3 graph.py check` | Chapters to analyze, to re-analyze, suspended (read-only) |
+| `python3 graph.py start` | Begins a sync: prints new chapters, changed paragraphs, moved and lost sources |
+| `python3 graph.py commit N …` | Re-anchors sources, saves snapshot and version, rebuilds, prints the report |
+| `python3 graph.py find <name>` / `--chapter N` | Pertinent cards (lazy reading) |
+| `python3 graph.py apply patch.txt` | Adds/removes card entries without hand-editing YAML |
+| `python3 graph.py build` / `validate` | Regenerate views / validate only |
+| `python3 graph.py migrate grafo/` | Convert a graph in the earlier Italian format |
+
+**Migrating an existing graph** (`grafo/` with `schede/`, `capitoli.yaml`, Italian fields, sources without quotes):
+
+1. `python3 graph.py migrate grafo/` — converts folders and fields and derives each quote from the cited line. Sources it can't convert are listed in `graph/MIGRATION.md` and `graph/migration-quotes.yaml`; nothing is invented.
+2. Fill `quote` (and `new_ref` if the fact is on another line) in `migration-quotes.yaml` — or ask Claude to — then `python3 graph.py fill-quotes graph/migration-quotes.yaml`.
+3. `python3 graph.py build`. Delete `grafo/` once it builds.
+
+Tests: `python3 tests/test_graph.py`.
+
+---
+
 ## Core Principles
 
 - **Claude formalizes, doesn't invent.** Concepts come from the author.
 - **One question at a time.** Always.
-- **No change without confirmation.** The author approves every modification.
+- **No change without confirmation.** The author approves every modification to the text (the graph is derived and syncs on its own).
 - **Demolition strengthens.** Every weakness found now is one less for hostile readers.
 - **Genre adapts everything.** Vocabulary, questions, structure — all shaped by the preset.
 - **Memory is explicit.** Every term, promise, and demolition cycle is written down.
 - **The introduction is written last.**
+- **The graph only knows what the chapters say.** Every card entry cites a line and quotes it.
 
 ---
 
