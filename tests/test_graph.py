@@ -14,6 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import graph  # noqa: E402
+import build_site  # noqa: E402
 
 CH1 = """---
 title: Il faro
@@ -199,6 +200,27 @@ class GraphTest(unittest.TestCase):
         self.assertEqual(snap, self.hashes())
         self.edit(1, "status: in-review", "status: complete")
         self.assertIn("TO RE-ANALYZE", self.run_graph("check")[1])
+
+    def test_site(self):
+        self.two_chapters()
+        (self.root / "site.yaml").write_text(
+            'title: Prova\ntagline: "Un faro."\nbook: {paragraphs: ["Testo."]}\n'
+            'featured: [{id: marta, role: Guardiana, text: "Sale al faro."}]\ngraph: {up_to_chapter: null}\n',
+            encoding="utf-8")
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            self.assertEqual(build_site.main(["--book", str(self.root)]), 0)
+        html = (self.root / "docs/index.html").read_text(encoding="utf-8")
+        self.assertIn('id="s-nave"', html)
+        self.assertIn('href="#card=marta"', html)
+        self.assertNotIn("{{", html)
+        p = self.root / "site.yaml"
+        p.write_text(p.read_text(encoding="utf-8").replace("up_to_chapter: null", "up_to_chapter: 1"), encoding="utf-8")
+        with contextlib.redirect_stdout(out):
+            build_site.main(["--book", str(self.root)])
+        html = (self.root / "docs/index.html").read_text(encoding="utf-8")
+        self.assertNotIn('id="s-nave"', html)       # chapter 2 only: hidden
+        self.assertNotIn("Non accende la lanterna", html)  # chapter 2 state of Marta: hidden
 
 
 if __name__ == "__main__":

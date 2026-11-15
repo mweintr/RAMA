@@ -57,7 +57,7 @@ LABELS = {
         "where": "Where", "on_stage": "On stage", "yes": "yes", "offstage": "no (reported / off stage)",
         "involved": "Involved", "comes_from": "Comes from", "leads_to": "Leads to",
         "traits": "Traits", "facts": "Facts", "not_said": "What the text does NOT say",
-        "open": "Open points / to verify", "state": "State chapter by chapter",
+        "open": "Open points / to verify", "state": "State chapter by chapter", "notes": "Reading notes",
         "relations": "Relations", "this_card": "this card", "event_chain": "Chain of events",
         "file": "File", "analyzed_version": "analyzed version", "touched": "Cards touched by the chapter",
         "ch": "ch.", "l": "l.", "suspended": "suspended (back in progress)",
@@ -70,7 +70,7 @@ LABELS = {
         "where": "Dove", "on_stage": "In scena", "yes": "sì", "offstage": "no (riferito / fuori scena)",
         "involved": "Coinvolti", "comes_from": "Viene da", "leads_to": "Porta a",
         "traits": "Caratteristiche", "facts": "Fatti", "not_said": "Cosa NON dice il testo",
-        "open": "Punti aperti / da verificare", "state": "Stato capitolo per capitolo",
+        "open": "Punti aperti / da verificare", "state": "Stato capitolo per capitolo", "notes": "Osservazioni di lettura",
         "relations": "Relazioni", "this_card": "questa scheda", "event_chain": "Catena degli eventi",
         "file": "File", "analyzed_version": "versione analizzata", "touched": "Schede toccate dal capitolo",
         "ch": "cap.", "l": "r.", "suspended": "sospeso (tornato in lavorazione)",
@@ -316,7 +316,7 @@ def relocate(ref, quote, old_lines, new_lines, mp, body):
 # ─── Cards I/O (canonical, one entry per line) ────────────────────────────────
 
 KEY_ORDER = ["id", "name", "aliases", "chapters", "chapter", "order", "when", "where", "on_stage",
-             "involved", "after", "summary", "traits", "facts", "state", "not_said", "open", "relations"]
+             "involved", "after", "summary", "traits", "facts", "state", "not_said", "notes", "open", "relations"]
 ITEM_ORDER = ["chapter", "to", "type", "text", "note", "source", "quote"]
 _PLAIN = re.compile(r"[a-z][a-z0-9-]*$")
 _RESERVED = {"true", "false", "yes", "no", "on", "off", "null", "y", "n"}
@@ -544,7 +544,7 @@ def build(book, quiet=False):
             then = [link(e["id"]) for e in events if i in (e.get("after") or [])]
             o += [f"- **{L['comes_from']}**: " + (", ".join(before) or "—"),
                   f"- **{L['leads_to']}**: " + (", ".join(then) or "—"), ""]
-        for key in ("traits", "facts", "not_said", "open"):
+        for key in ("traits", "facts", "not_said", "notes", "open"):
             if n.get(key):
                 o += [f"## {L[key]}", ""]
                 for x in n[key]:
@@ -1072,7 +1072,10 @@ def cmd_migrate(book, args):
             notes.append(f"folder {d.name}/ has no matching card type in preset '{book.preset}' — skipped")
             continue
         for f in sorted(d.glob("*.yaml")):
-            data = rename_keys(yaml.safe_load(f.read_text(encoding="utf-8")) or {}, unknown)
+            data = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+            if "note" in data:  # card-level reading notes (not the 'nota' of a relation)
+                data["notes"] = data.pop("note")
+            data = rename_keys(data, unknown)
             data = {k: v for k, v in data.items() if v is not None}
             raw[data.get("id", f.stem)] = (folder, data)
             names[data.get("id", f.stem)] = [data.get("name", "")] + list(data.get("aliases", []) or [])

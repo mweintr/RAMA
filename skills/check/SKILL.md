@@ -61,7 +61,7 @@ Check `book.config.json` for:
 - `author_voice.tone` not empty/default → onboarding session 3 complete
 
 ### 6. Skills count
-Count `.md` files in `skills/` subdirectories. Expected: 32.
+Count `.md` files in `skills/` subdirectories. Expected: 33.
 
 ### 7. Book graph
 - `graph.py` exists in the project root
@@ -70,7 +70,11 @@ Count `.md` files in `skills/` subdirectories. Expected: 32.
 - If `graph/` exists: `python3 graph.py validate` (read-only) and `python3 graph.py check`. Report errors, chapters waiting for a sync (they will be synced by the next session-start), suspended chapters
 - If `graph/` does not exist: ⚪ *not created yet — it is born when the first chapter is complete*
 
-### 8. Quick smoke test
+### 8. Website
+- If `site.yaml` exists: `python3 build_site.py --check` (read-only). Report warnings (missing cover, download file, featured ids, empty `podcast.base_url`)
+- If not: ⚪ *no website yet — `/ghost-writer:site` when you want one*
+
+### 9. Quick smoke test
 Generate one sentence in the author's voice (from `book.config.json → author_voice`) about the book's topic (from `book_profile → premise`). This proves the voice profile is readable and usable.
 
 ---
@@ -87,7 +91,7 @@ Plugin structure
 
 Plugin manifest
   ✅ Name: ghost-writer
-  ✅ Version: 1.5.0
+  ✅ Version: 1.6.0
   ⚠️  Author: still set to "Your Name" — update before publishing
 
 Project configuration
@@ -102,12 +106,16 @@ Onboarding status
   ⚠️  Session 3 — Voice profile: incomplete — run /ghost-writer:setup-voice
 
 Skills
-  ✅ 32 skills found
+  ✅ 33 skills found
 
 Book graph
   ✅ graph.py + PyYAML available
   ✅ graph/: [N] chapters analyzed, [M] cards valid — up to date
   ⚪ graph/ not created yet (born when the first chapter is complete)
+
+Website
+  ✅ site.yaml valid — docs/index.html: [sections]
+  ⚪ no website yet (/ghost-writer:site)
 
 Voice smoke test
   ✅ "[one sentence generated in the author's voice about the book's topic]"

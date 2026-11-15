@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.6.0] — 2026-11-15
+
+### Added
+
+- **`/ghost-writer:site`** — the book's website: one pre-generated, mobile-first page for GitHub Pages (`docs/index.html`). Opening with cover, the book with a download button, featured characters / people / key ideas, podcast episodes with RSS feed, and the explorable book graph (search, type filters, chapter event chains, open points, every card in full). Optional sections appear only when their source exists; texts are drafted with the author and saved in `site.yaml`; interface labels follow the book's language (en, it; override with `labels`).
+- **`build_site.py`** — `--init`, `--check`, build. Standard library + PyYAML (Pillow optional). `graph.up_to_chapter` hides everything beyond a chapter for serial publication.
+- **`site/page.html`** — the page template, generalized to every preset's card types.
+- Graph cards accept `notes` (reading observations that are not errors); the migration maps the legacy card-level `note` to it.
+
+### Changed
+
+- Graph sync and the podcast skill rebuild the site when `site.yaml` exists.
+- `check` expects 33 skills and validates `site.yaml`.
+
 ## [1.5.0] — 2026-11-15
 
 ### Added

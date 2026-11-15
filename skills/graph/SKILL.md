@@ -16,7 +16,7 @@ The graph is a derived artifact: it never asks the author for confirmation. The 
 
 1. **Only what is written in the chapters enters a card**, with its source. Never from `outline.md`, `book-memory.md`, character files or memory.
 2. **Every source carries a quote**: `source: "c3:19"` (chapter 3, line 19 of the file) + `quote:` a short exact excerpt of that line (3–15 words) that supports the entry. Lines shift; the quote is what lets the script re-anchor the source.
-3. What the text does **not** say goes in `not_said`. Doubts, contradictions, guesses to verify go in `open`. Never fill a gap.
+3. What the text does **not** say goes in `not_said`. Contradictions and errors still to fix go in `open`. Reader's observations that are not errors (echoes, parallels, deliberate ambiguities) go in `notes`. Never fill a gap.
 4. **Only chapters with `status: complete` are analyzed.** Drafts are never read for the graph, not even when their version changes.
 5. **Edit only `graph/cards/`.** `graph/view/`, `graph/INDEX.md`, `graph/graph.json`, `graph/snapshots/` and `graph/chapters.yaml` are written by `graph.py`.
 6. A fact removed from the text is **removed from the card**, not kept.
@@ -104,6 +104,8 @@ The procedure other skills run at the end. Also run it when called directly with
 5. `python3 graph.py commit N [N …]` (all the chapters from step 1). It re-anchors moved sources, saves the snapshot and the analyzed version, rebuilds the views. It **stops and changes nothing** on a non-existent id, a malformed source, a quote not found at its line, a source citing a chapter that is not analyzed. Fix and run it again.
 6. Print its one-line report to the author, nothing more:
    > Graph synced (c4 v2.1): 3 new cards, 5 modified, 0 removed, 12 sources re-anchored · open questions: +2, 14 total.
+
+7. If `site.yaml` exists, run `python3 build_site.py` (the site's graph follows the cards) and add to the report: *Site rebuilt: commit and push `docs/` to publish it.*
 
 Never ask the author to confirm anything in the graph.
 

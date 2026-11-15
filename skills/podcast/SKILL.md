@@ -176,7 +176,7 @@ When the author reports a word that is mispronounced, fix the spelling in the sc
 ```bash
 python3 export_podcast.py feed
 ```
-Ask for `podcast.base_url`, the public folder where the MP3s will be hosted. Free options: GitHub Releases, the Internet Archive, or the author's own site. The skill generates `podcast/feed.xml`, ready to submit to Spotify for Creators, Apple Podcasts and other directories. Remind the author to add a 3000×3000 cover image in their hosting or directory.
+Ask for `podcast.base_url`, the public folder where the MP3s will be hosted. Free options: the book's website (`/ghost-writer:site`: `https://<user>.github.io/<repository>/episodes`), GitHub Releases, the Internet Archive, or the author's own site. The skill generates `podcast/feed.xml`, ready to submit to Spotify for Creators, Apple Podcasts and other directories. Remind the author to add a 3000×3000 cover image in their hosting or directory.
 
 ---
 
@@ -204,3 +204,5 @@ Ask for `podcast.base_url`, the public folder where the MP3s will be hosted. Fre
 
 > Podcast ready: [N] episodes, [total] minutes, in `podcast/episodes/`.
 > Next: listen to episode 1, then `/ghost-writer:podcast feed` when you're ready to publish.
+
+If `site.yaml` exists, run `python3 build_site.py`: the new episodes go on the website (commit and push `docs/` to publish). Otherwise offer once: *"Want a website for the book with the episodes, the graph and a download? `/ghost-writer:site`"*
