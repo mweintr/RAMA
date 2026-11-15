@@ -97,3 +97,19 @@ Check for:
 - **Character logic** — does the protagonist's behavior follow from who they are, or does the plot require them to be inconsistent?
 - **Tone** — does the story maintain its register (solemn, ironic, warm, dark) throughout?
 - **Ending** — does the resolution feel earned, or does it feel like the author imposing a lesson?
+
+---
+
+## graph adaptations
+
+Card types for `/ghost-writer:graph` (folder: type). Card content is written in the book's language; folders and fields stay in English.
+
+```graph-types
+characters: character — animals and figures, with their trait
+places: place   — where the fable unfolds
+objects: object   — the things that carry the moral
+events: event   — the steps of the fable, in order
+concepts: concept   — the moral and the rules of the fable's world
+```
+
+The moral is a `concepts/` card: its traits cite where the text states or shows it.

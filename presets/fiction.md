@@ -85,3 +85,21 @@ Check for:
 - **Tone drift** — does the narrative voice shift register unexpectedly?
 - **Theme coherence** — do the events of the book add up to the stated theme, or do they contradict it?
 - **Pacing** — do scenes alternate between tension and release, or does the pressure flatline?
+
+---
+
+## graph adaptations
+
+Card types for `/ghost-writer:graph` (folder: type). Card content is written in the book's language; folders and fields stay in English.
+
+```graph-types
+characters: character   — people and named beings in the story
+organizations: organization — companies, groups, institutions
+objects: object   — things that matter: devices, documents, gifts
+places: place   — locations, rooms, cities
+concepts: concept   — rules, procedures, habits, laws of the world
+terms: term   — the glossary: words the book gives a precise meaning to
+events: event   — what happens, ordered, with causes (after)
+```
+
+Fiction keeps the event chain: every event has `chapter`, `order`, `when`, `where`, `on_stage`, `involved`, `after`. Characters carry `state` chapter by chapter (age, wounds, what they know).

@@ -130,7 +130,7 @@ Wait for confirmation before smoothing.
 
 When all integrations are complete:
 
-1. Increment the version number in the file's frontmatter
+1. Increment the version number in the file's frontmatter. If the author declares this the final version, also set `status: complete` in the frontmatter
 2. Update the **Demolition Log** in the chapter file — for each issue now integrated, change status from `resolved` to `integrated` and add the version it was applied in
 3. Update `book-memory.md`:
    - If a term was redefined → update its entry in **Defined Terms**
@@ -150,3 +150,9 @@ When all integrations are complete:
 > Criticisms deferred: [list]
 >
 > The text is now at version [n]. Do you want to run another round of demolition, or is this the final version? (Before closing it, `/ghost-writer:revise [file]` catches grammar, punctuation and continuity errors.)
+
+---
+
+## Graph Sync
+
+Last step, after everything above. If this skill set a chapter to `status: complete`, or changed the `version` of a chapter that is already `complete`, run the **Sync** procedure of `/ghost-writer:graph` (`skills/graph/SKILL.md → Sync`). No confirmation from the author: end with its one-line report. Drafts are never synced. If `graph.py` cannot run (PyYAML missing), say so in one line and continue.

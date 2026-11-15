@@ -39,6 +39,8 @@ Then read the rest:
    - If a chapter has no `summary` field (written before auto-summary was active): read its full text
    - Full reads are the exception, not the rule
 
+4. **If `graph/` exists** (`/ghost-writer:graph`): use it instead of drilling into chapter text. Read `graph/INDEX.md` to locate cards and the open points already logged, then only the cards each check needs — terms for **Term Drift** (`cards/terms/`, one trait per definition, each with `cN:line` + quote), theses/concepts for **Contradicted Claims**, characters' `state` per chapter, events for the timeline. Two entries of one card that disagree, with their sources, are a finding. Open a chapter only at the cited line. Cards of SUSPENDED chapters describe their analyzed version — say so when you cite them
+
 `demolition-history.md` is the most important input. Do not repeat work already documented — verify whether patterns have been resolved or are still active, and look for new ones not yet captured.
 
 ---

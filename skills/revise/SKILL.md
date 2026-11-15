@@ -28,6 +28,7 @@ Then read:
 3. `characters/*.md` — only the **Facts** section (if present) and header data (name, age, role)
 4. The chapter(s) to revise — **full text** (copy-editing cannot work from summaries)
 5. For continuity checks on a single chapter: the summaries of earlier chapters; drill into full text of an earlier chapter only when a detail needs to be verified against its first mention
+6. **If `graph/` exists**: for timeline, character and continuity checks, use the graph instead of re-reading earlier chapters — `python3 graph.py find --chapter [N]` for the cards the chapter touches, `python3 graph.py find <name>` for a character or object, then read only those cards (`state` per chapter, `traits`, events `when`/`after`). Every entry has `cN:line` + quote: to verify a first mention, open that chapter at that line, not the whole chapter. The chapter under revision is still read in full
 
 If `style-rules.md` is missing or its **Punctuation Conventions** still hold placeholders (`[e.g. …]`), ask **one** question:
 > There are no punctuation conventions yet. Do you want me to (A) infer them from the chapters already written, or (B) use the standard conventions for [language]?
@@ -165,7 +166,7 @@ Ask:
    - `## Continuity Ledger` — add every detail checked, with its canonical value and first-mention chapter
 2. Update `characters/[name].md → Facts` with canonical physical and biographical data (create the section if missing)
 3. If the conventions were inferred, save them to `style-rules.md`. If the author fixed the same kind of thing 3+ times and no rule covers it, propose a new rule (`/ghost-writer:rules add`)
-4. In each revised chapter's frontmatter, set `revised: [date]`
+4. In each revised chapter's frontmatter, set `revised: [date]`; where at least one fix was applied, also increment `version`
 5. Tell the author:
 
 > Revision complete — [N] fixes applied, [M] left as intentional. Timeline and continuity ledger updated: future revisions will check new chapters against them automatically.
@@ -185,3 +186,9 @@ Used only when the author chooses (B) and `style-rules.md` has no conventions ye
 | serial comma | no | yes | no | no | no | no |
 | space before `?!:;` | no | no | no | yes (thin) | no | no |
 | numbers | words up to ten | words up to ten | words up to ten | words up to ten | words up to twelve | words up to ten |
+
+---
+
+## Graph Sync
+
+Last step, after everything above. If this skill set a chapter to `status: complete`, or changed the `version` of a chapter that is already `complete`, run the **Sync** procedure of `/ghost-writer:graph` (`skills/graph/SKILL.md → Sync`). No confirmation from the author: end with its one-line report. Drafts are never synced. If `graph.py` cannot run (PyYAML missing), say so in one line and continue.

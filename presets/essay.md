@@ -71,3 +71,19 @@ Check for:
 - **Unresolved objections** — were counter-arguments raised but never answered?
 - **Argument gaps** — does each chapter's conclusion actually support the next chapter's premise?
 - **Tone consistency** — does the author maintain their argumentative voice or drift into description?
+
+---
+
+## graph adaptations
+
+Card types for `/ghost-writer:graph` (folder: type). Card content is written in the book's language; folders and fields stay in English.
+
+```graph-types
+concepts: concept   — ideas the book builds and uses
+terms: term   — defined words: the definition, cited where the text gives it
+theses: thesis   — claims the book argues, with where it argues them
+sources: source   — studies, books, data, quotations the text relies on
+people: person   — authors, figures, examples named in the text
+```
+
+No event chain. Relations carry the argument: `supports`, `contradicts`, `depends on`, `defines`, `cites`. A term's definition drifting between chapters shows up as two traits with different sources.

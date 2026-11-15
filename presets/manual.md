@@ -86,3 +86,19 @@ Check for:
 - **Assumption tracking** — does a later chapter assume knowledge the book hasn't provided yet?
 - **Tone consistency** — does the author maintain the voice of a trusted guide, or drift into lecturer or cheerleader?
 - **Exercise coherence** — do the exercises actually practice what the chapter taught?
+
+---
+
+## graph adaptations
+
+Card types for `/ghost-writer:graph` (folder: type). Card content is written in the book's language; folders and fields stay in English.
+
+```graph-types
+concepts: concept   — principles and mental models
+terms: term   — defined words, units, acronyms
+procedures: procedure — step sequences the reader performs
+tools: tool   — software, devices, materials
+sources: source   — references, standards, documentation cited
+```
+
+Procedures cite each step with its source so a changed step is caught at the next sync.

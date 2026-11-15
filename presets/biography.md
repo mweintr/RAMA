@@ -89,3 +89,21 @@ Check for:
 - **Authorial stance** — does the author's relationship to the subject (admiration/ambivalence/criticism) remain consistent, or does it shift without explanation?
 - **Chronology and causality** — if the book is chronological, are cause and effect clear? If thematic, is the logic of each theme section coherent?
 - **Source transparency** — is the reader always clear about what is sourced and what is inferred?
+
+---
+
+## graph adaptations
+
+Card types for `/ghost-writer:graph` (folder: type). Card content is written in the book's language; folders and fields stay in English.
+
+```graph-types
+people: person   — the subject and everyone around them
+organizations: organization — schools, employers, movements
+places: place   — where the life happened
+objects: object   — letters, photos, belongings that recur
+events: event   — dated facts of the life, ordered, with causes
+sources: source   — documents, interviews, archives the book cites
+terms: term   — words and names the book defines
+```
+
+Biography is chronology first: events need `when` as precise as the text allows; what the text leaves undated goes to `not_said`, never guessed.

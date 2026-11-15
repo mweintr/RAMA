@@ -18,6 +18,7 @@ This is not about whether the character is well-written in the abstract — it i
 1. Ask which character(s) to check and which chapter or scene to audit
 2. Read `characters/[character-name].md` — the full profile
 3. Read the specified chapter file in `chapters/`
+4. **If `graph/` exists**: `python3 graph.py find <character name>` and read that card — its `traits`, `state` chapter by chapter and relations are what the text already established about the character in earlier chapters, each with `cN:line` + quote. Use it instead of re-reading earlier chapters; flag behavior in this chapter that contradicts an earlier `state` or trait, citing both lines
 
 If no profile exists for the character:
 > There's no profile for [character] yet. Run `/ghost-writer:character-interview [character-name]` first, or proceed without a profile (I'll flag what seems inconsistent based on the chapter alone).

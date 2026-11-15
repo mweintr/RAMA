@@ -109,3 +109,9 @@ Ask:
 3. Tell the author:
 
 > [N] corrections applied in [chapters]. [M] skipped, [K] open questions. When you want another round, run `/ghost-writer:corrections print` for a fresh PDF.
+
+---
+
+## Graph Sync
+
+Last step, after everything above. If this skill set a chapter to `status: complete`, or changed the `version` of a chapter that is already `complete`, run the **Sync** procedure of `/ghost-writer:graph` (`skills/graph/SKILL.md → Sync`). No confirmation from the author: end with its one-line report. Drafts are never synced. If `graph.py` cannot run (PyYAML missing), say so in one line and continue.

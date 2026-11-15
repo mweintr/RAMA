@@ -130,7 +130,7 @@ If review → note in session file, wait. If integrate → proceed.
 
 Run `integrate`. When complete, update session:
 - Check off `integrate`
-- Set `status: complete`
+- Set `status: complete` (session file and chapter frontmatter)
 
 ---
 
@@ -152,3 +152,9 @@ Check consistency trigger — if 3+ chapters complete since last check, suggest 
 
 Say:
 > Run `/ghost-writer:chapter` for the next chapter, or `/ghost-writer:session-start` to see your progress.
+
+---
+
+## Graph Sync
+
+Last step, after everything above (`integrate` may already have synced: a second run finds the graph up to date and prints nothing). If this skill set a chapter to `status: complete`, or changed the `version` of a chapter that is already `complete`, run the **Sync** procedure of `/ghost-writer:graph` (`skills/graph/SKILL.md → Sync`). No confirmation from the author: end with its one-line report. Drafts are never synced. If `graph.py` cannot run (PyYAML missing), say so in one line and continue.

@@ -204,3 +204,9 @@ Issues found: [N] | Resolved: [N] | Deferred: [N] | Accepted: [N]
 
 Then say:
 > This chapter has been through the full review cycle. Run `/ghost-writer:chapter` for the next chapter, or `/ghost-writer:consistency-check` if you have 3+ chapters complete.
+
+---
+
+## Graph Sync
+
+Last step, after everything above (`integrate` may already have synced: a second run finds the graph up to date and prints nothing). If this skill set a chapter to `status: complete`, or changed the `version` of a chapter that is already `complete`, run the **Sync** procedure of `/ghost-writer:graph` (`skills/graph/SKILL.md → Sync`). No confirmation from the author: end with its one-line report. Drafts are never synced. If `graph.py` cannot run (PyYAML missing), say so in one line and continue.

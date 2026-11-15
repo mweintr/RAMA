@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.5.0] — 2026-11-15
+
+### Added
+
+- **`/ghost-writer:graph`** — the book graph: cards for characters, organizations, objects, places, concepts, terms and events (fiction), or concepts, terms, theses, sources and people (essay), and the other presets' types, linked to each other and to the chapter line they come from. Only what the chapters say enters a card; `not_said` and `open` hold gaps and doubts.
+- **`graph.py`** — `check`, `start`, `diff`, `commit`, `build`, `validate`, `find`, `apply`, `migrate`, `fill-quotes`. Standard library + PyYAML. Stops on non-existent ids, malformed sources, quotes not found at their line, sources citing chapters that are not analyzed; a failed commit is rolled back.
+- **Self-feeding**: only `status: complete` chapters are analyzed; the trigger is the chapter `version` against the analyzed one. The graph is born with the first complete chapter. A chapter back in progress is *suspended*: its cards stay at the analyzed version until it is complete again.
+- **Incremental update**: every source is `cN:line` + a short quote. A snapshot of the analyzed text gives the diff; moved sources are re-anchored automatically, only the changed paragraphs and the sources whose quote disappeared are handed to Claude.
+- **Migration** from the earlier Italian format (`grafo/schede/`, `capitoli.yaml`): quotes derived from the cited lines, sources that cannot be converted listed in `graph/MIGRATION.md` and `graph/migration-quotes.yaml`, never invented.
+- **`## graph adaptations`** in the fiction, biography, essay, manual, childrens-book and fable presets: card types per genre.
+
+### Changed
+
+- integrate, revise, corrections, retune, chapter, review end with a graph sync; session-start, resume, status run `graph.py check` as a safety net.
+- revise, consistency-check, character-check and write read the pertinent cards instead of re-reading chapters when `graph/` exists; longform lazy reading covers the graph.
+- integrate sets `status: complete` in the chapter frontmatter when the author declares the final version; revise and retune increment `version` when they change a chapter.
+- `check` expects 32 skills and checks `graph.py`, PyYAML and the graph.
+
 ## [1.4.0] — 2026-11-01
 
 ### Added

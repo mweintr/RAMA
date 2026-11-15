@@ -84,3 +84,12 @@ If a lot has been done:
 > → [next action]
 
 Never say "I noticed" or "According to the files." Just say what's true.
+
+---
+
+## Graph Check
+
+Safety net for chapters changed outside the writing cycle (for example edited by hand). Run `python3 graph.py check` silently:
+- **TO ANALYZE / TO RE-ANALYZE** listed → run the **Sync** procedure of `/ghost-writer:graph` before anything else, then continue; show only its one-line report.
+- **SUSPENDED** listed → mention it in one line: *"Graph: chapter N is back in progress — its cards stay at v[X] until it is complete again."*
+- Up to date, not created yet, or PyYAML missing → say nothing.

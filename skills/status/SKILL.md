@@ -28,6 +28,9 @@ CHAPTERS
 [✅/📝/⬜] Ch. 2 — [Title]     v[X.X]
 ...
 
+[If graph/ exists]
+Graph: [N] chapters analyzed · [M] cards · [K] open points[ · suspended: c[N]]
+
 ─────────────────────────────────
 NEXT SUGGESTED STEP
 [what to do now, based on status]
@@ -56,3 +59,12 @@ NEXT SUGGESTED STEP
 - All chapters + intro + conclusion complete → suggest `/ghost-writer:manuscript-final`
 - Every 3-4 completed chapters → suggest `/ghost-writer:consistency-check`
 - All integrated → suggest next chapter with `/ghost-writer:ask-before-writing` + `/ghost-writer:write`
+
+---
+
+## Graph Check
+
+Safety net for chapters changed outside the writing cycle (for example edited by hand). Run `python3 graph.py check` silently:
+- **TO ANALYZE / TO RE-ANALYZE** listed → run the **Sync** procedure of `/ghost-writer:graph` before anything else, then continue; show only its one-line report.
+- **SUSPENDED** listed → mention it in one line: *"Graph: chapter N is back in progress — its cards stay at v[X] until it is complete again."*
+- Up to date, not created yet, or PyYAML missing → say nothing.

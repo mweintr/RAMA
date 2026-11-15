@@ -124,3 +124,12 @@ If the author says they're done for the day, produce a one-line session summary 
 
 Then say:
 > Good session. [One genuine observation about the work — something specific that moved forward, a pattern you noticed, a question worth sitting with before next time.]
+
+---
+
+## Graph Check
+
+Safety net for chapters changed outside the writing cycle (for example edited by hand). Run `python3 graph.py check` silently:
+- **TO ANALYZE / TO RE-ANALYZE** listed → run the **Sync** procedure of `/ghost-writer:graph` before anything else, then continue; show only its one-line report.
+- **SUSPENDED** listed → mention it in one line: *"Graph: chapter N is back in progress — its cards stay at v[X] until it is complete again."*
+- Up to date, not created yet, or PyYAML missing → say nothing.

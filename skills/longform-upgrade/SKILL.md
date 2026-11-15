@@ -165,6 +165,8 @@ After upgrade, all skills follow this reading protocol:
 5. Chapter summaries from adjacent chapters (not full text)
 6. Full text of the specific chapter being worked on
 
+**Graph (if `graph/` exists):** never read whole. Locate cards with `python3 graph.py find <name>` or `find --chapter N` (or one scan of `graph/INDEX.md`), then read only those card files. Open a chapter only at the `cN:line` a card cites. A sync after a version change reads only the changed paragraphs printed by `graph.py start`, not the chapter.
+
 **Full reads (consistency and closing):**
 - `consistency-check` — reads all part memory files + all chapter summaries + spot-checks full text on flagged issues
 - `manuscript-final` — reads everything

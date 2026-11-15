@@ -106,3 +106,19 @@ Check for:
 - **Pacing** — is every scene/page earning its place, or are there sections where the story stalls?
 - **The fear calibration** — if scary elements are present, are they consistently the right level of scary for the target age?
 - **Read-aloud quality** — does the language maintain its spoken rhythm throughout, or does it drift into prose that works on the page but not aloud?
+
+---
+
+## graph adaptations
+
+Card types for `/ghost-writer:graph` (folder: type). Card content is written in the book's language; folders and fields stay in English.
+
+```graph-types
+characters: character — who appears in the story
+places: place   — where it happens
+objects: object   — the things the story uses
+events: event   — what happens, in order
+terms: term   — invented words and names
+```
+
+Small graph: few cards, mainly to keep names, colors, sizes and repeated phrases identical from page to page.

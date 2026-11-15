@@ -89,7 +89,7 @@ After the chapter, say only:
 
 Three possible responses:
 
-**Yes** → done. Update the chapter file. Update `book.config.json → author_voice` with any new patterns extracted from the sample — add specific phrases to `signature_phrases`, note any new vocabulary patterns.
+**Yes** → done. Update the chapter file and increment `version` in its frontmatter. Update `book.config.json → author_voice` with any new patterns extracted from the sample — add specific phrases to `signature_phrases`, note any new vocabulary patterns.
 
 **Closer but still off** → ask: > What's still wrong? Show me another passage — how you'd say that specific part.
 Run another retune pass on the sections still off.
@@ -110,3 +110,9 @@ Tell the author:
 > Voice profile updated with what I learned from your sample. Future chapters will use this.
 
 This is the most important output of the retune — not the fixed chapter, but the improved voice profile that makes future chapters need less fixing.
+
+---
+
+## Graph Sync
+
+Last step, after everything above. If this skill set a chapter to `status: complete`, or changed the `version` of a chapter that is already `complete`, run the **Sync** procedure of `/ghost-writer:graph` (`skills/graph/SKILL.md → Sync`). No confirmation from the author: end with its one-line report. Drafts are never synced. If `graph.py` cannot run (PyYAML missing), say so in one line and continue.

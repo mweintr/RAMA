@@ -30,6 +30,7 @@ Quick-Write is appropriate when the author already has a clear idea, wants a fas
 2. **If `longform_mode: true`**: read `book-memory.md` (global index only) + `memory/part-[current].md` + handoff section of the previous part file + summaries from adjacent chapter frontmatters. Read only `## Defined Terms`, `## Central Claims Made`, and `## Open Promises to the Reader` sections.
 3. **If `longform_mode: false`**: read `book-memory.md` — but only the sections `## Defined Terms`, `## Central Claims Made`, and `## Open Promises to the Reader`. Skip `## Session Log`, `## Tone Calibration`, `## Recurring Metaphors`.
 4. If this chapter features profiled characters, read their files in `characters/`
+4b. **If `graph/` exists**: for the characters, places, objects and terms this section uses, `python3 graph.py find <name>` and read only those cards — what the published chapters already say (ages, appearance, who knows what, last `state`, open threads). Never re-read earlier chapters for this. Do not contradict a card; if the outline asks for something a card contradicts, ask the author before writing
 5. Read `outline.md` — identify the requested section and its central claim
 6. **Style alignment**: if `voice-sample.md` exists and is populated, read it. If it does not exist or contains only the placeholder text, read one existing chapter from `chapters/` instead.
 7. Read `style-rules.md` (if present) — every rule and punctuation convention applies to the new text
