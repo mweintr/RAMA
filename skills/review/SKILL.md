@@ -1,6 +1,6 @@
 ---
 name: review
-description: Read a RAMA chapter as a specific kind of reader (editor, target reader, hostile reader, period or subject expert, someone outside the audience, or a custom persona) and report how that reader actually experiences it. Run one persona or all five in sequence. Usage /rama:review 5 editor, /rama:review 5 all, or /rama:review 5 <custom persona file>.
+description: Read a RAMA chapter as a specific kind of reader (editor, target reader, hostile reader, period or subject expert, someone outside the audience, or a custom persona) and report how that reader actually experiences it. Run one persona or all five in sequence. Usage /rama:review 5 editor, /rama:review 5 all, or /rama:review 5 [custom persona file].
 ---
 
 # RAMA: Review

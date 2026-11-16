@@ -22,6 +22,16 @@ SKILLS = ROOT / 'skills'
 DIST = ROOT / 'dist' / 'claude-ai'
 
 
+def lint():
+    bad = []
+    for f in sorted(SKILLS.glob('*/SKILL.md')):
+        m = re.search(r'^description:(.*)$', f.read_text(encoding='utf-8'), flags=re.M)
+        if not m or re.search(r'[<>]', m.group(1)):
+            bad.append(f.relative_to(ROOT).as_posix())
+    if bad:
+        raise SystemExit('Description missing or contains < or > (claude.ai rejects XML tags): ' + ', '.join(bad))
+
+
 def sync():
     for skill in sorted(p for p in SKILLS.iterdir() if (p / 'SKILL.md').exists()):
         refs = skill / 'references'
@@ -55,5 +65,6 @@ def package():
 
 
 if __name__ == '__main__':
+    lint()
     sync()
     package()
