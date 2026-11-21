@@ -17,7 +17,7 @@ Before starting, read:
 Find the project folder (see `project-files.md → Where the project lives`) and
 list every file in it. Sort each file into a role: synopsis (including a
 `## Synopsis` section inside another file), outline, style guide, story bible,
-manuscript, glyphs, characters, reference. If a RAMA Log already exists,
+manuscript, glyphs, characters, concept, reference. If a RAMA Log already exists,
 read it first; this run is an update, not a fresh setup.
 
 Show the inventory in one short table and say right away which path you are
@@ -25,7 +25,8 @@ on:
 
 - **All required files present** → Step 2 (Verify).
 - **Some present** → Step 2 for what exists, then Step 3 for the rest.
-- **Nothing (or only notes and a concept)** → Step 3 (Build).
+- **Nothing (or only notes and a concept)** → Step 3 (Build). If there's
+  nothing at all, offer `/rama:brainstorm` first to develop a story idea.
 
 If two files could fill one role (two style guides, say), ask in the first
 survey which one is canonical. One may be an old guide to adapt; see Step 3.
@@ -103,7 +104,9 @@ it. Use survey rounds to draw the material out of the author. Write a draft,
 show it, revise it on the author's notes, and save it only after they approve.
 
 **Synopsis.** Start from whatever the author has: a concept, a paragraph, a
-pitch. Survey for genre and comparables, protagonist and want, the central
+pitch. If a **Concept file** from `brainstorm` exists, it is the starting
+point: don't ask again what it settles, use its chosen sample passage when you
+build the style guide, and settle its Open questions in the survey. Survey for genre and comparables, protagonist and want, the central
 turn, the ending, and the narrator's relation to events. Draft 500–750 words in
 present tense, with the ending stated.
 
