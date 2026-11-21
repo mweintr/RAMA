@@ -17,6 +17,7 @@ by Simone Di Roma (MIT). Several of its editorial skills are adapted here.
 
 | Command | What it does |
 |---|---|
+| `/rama:brainstorm` | Starting from nothing, or from a seed? RAMA offers a spread of premises, you star, strike and combine until one holds, then it saves the **Concept** file for config to build on. |
 | `/rama:config` | Finds and checks the project files and asks about gaps and contradictions. Builds any missing file by interview, or adapts an old style guide. Writes the **RAMA Log**. |
 | `/rama:beats 5` | Story beats for chapter 5, built on the outline **and** on what chapters 1–4 actually established. Surveys you first, then saves to the Beats file. |
 | `/rama:compose 5` | Writes chapter 5 from its beats, to the style guide, self-checks it against the guide's revision checklist, and adds it to the manuscript once you approve. |
@@ -33,7 +34,6 @@ by Simone Di Roma (MIT). Several of its editorial skills are adapted here.
 | `/rama:integrate 5` | Turns your answers from demolish/review into approved text changes. |
 | `/rama:retune 5` | "This isn't my voice." Realigns the voice to a rough sample from you. |
 | `/rama:freeflow 7` | Brain-dump mode, which turns the dump into beats or decisions. |
-| `/rama:brainstorm 7` · `"a question"` · `names` · `title` | RAMA proposes a wide spread of ideas grounded in the book; you star, strike and combine until one holds, then it becomes a Decision, beats, or an outline change. |
 | `/rama:character-interview Name` / `character-check 5 Name` | Deep character profiles and consistency checks. |
 | `/rama:corrections` | Review PDF with paragraph IDs, then imports your annotations, notes or photos and applies them. |
 
@@ -41,6 +41,7 @@ by Simone Di Roma (MIT). Several of its editorial skills are adapted here.
 
 ```
 The Shape of the Sea/
+├── The Shape of the Sea — Concept.md        # written by brainstorm, for a new book
 ├── The Shape of the Sea — Outline.md        # with ## Synopsis, or a separate Synopsis file
 ├── The Shape of the Sea Style Guide.md
 ├── The Shape of the Sea — Story Bible.md    # if a series or complex
@@ -48,7 +49,6 @@ The Shape of the Sea/
 ├── The Shape of the Sea — Beats.md          # written by beats
 ├── The Shape of the Sea — RAMA Log.md       # written by config; RAMA's memory
 ├── The Shape of the Sea — Check Report.md   # written by check
-├── The Shape of the Sea — Brainstorm.md     # written by brainstorm
 ├── glyphs/Chapter_head.png, divider.png     # for compile
 └── build/                                   # compile output
 ```
