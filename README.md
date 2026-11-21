@@ -33,6 +33,7 @@ by Simone Di Roma (MIT). Several of its editorial skills are adapted here.
 | `/rama:integrate 5` | Turns your answers from demolish/review into approved text changes. |
 | `/rama:retune 5` | "This isn't my voice." Realigns the voice to a rough sample from you. |
 | `/rama:freeflow 7` | Brain-dump mode, which turns the dump into beats or decisions. |
+| `/rama:brainstorm 7` · `"a question"` · `names` · `title` | RAMA proposes a wide spread of ideas grounded in the book; you star, strike and combine until one holds, then it becomes a Decision, beats, or an outline change. |
 | `/rama:character-interview Name` / `character-check 5 Name` | Deep character profiles and consistency checks. |
 | `/rama:corrections` | Review PDF with paragraph IDs, then imports your annotations, notes or photos and applies them. |
 
@@ -47,6 +48,7 @@ The Shape of the Sea/
 ├── The Shape of the Sea — Beats.md          # written by beats
 ├── The Shape of the Sea — RAMA Log.md       # written by config; RAMA's memory
 ├── The Shape of the Sea — Check Report.md   # written by check
+├── The Shape of the Sea — Brainstorm.md     # written by brainstorm
 ├── glyphs/Chapter_head.png, divider.png     # for compile
 └── build/                                   # compile output
 ```
