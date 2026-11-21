@@ -1,7 +1,7 @@
 {
   "name": "rama",
   "description": "RAMA: a ghost-writing workflow for novels built from a synopsis, outline, style guide and story bible. brainstorm develops a story idea into a concept for a new book, config sets up and checks the project, beats plans a chapter, compose writes it to the style guide, check enforces style, outline and continuity, and compile builds .md/.docx/.epub with glyphs. Every question is asked as a three-option survey with a write-in. Includes adapted ghost-writer editorial tools (demolish, review, integrate, retune, freeflow, characters, corrections).",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Michael Weintraub"
   },

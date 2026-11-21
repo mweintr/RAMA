@@ -7,7 +7,7 @@
     {
       "name": "rama",
       "source": "./",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Ghost-writing workflow for novels: config, beats, compose, check, compile, plus editorial tools adapted from ghost-writer.",
       "category": "productivity",
       "keywords": ["writing", "novel", "fiction", "ghost-writer"]

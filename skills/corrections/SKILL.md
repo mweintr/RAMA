@@ -1,6 +1,6 @@
 ---
 name: corrections
-description: Collect and apply the corrections the author makes while rereading a RAMA book away from the computer. Prints a review PDF with paragraph IDs in the margin (5.12 = chapter 5, paragraph 12), imports highlights and comments from the annotated PDF, or parses free-form notes (phone notes, dictation, photos of marked-up pages). Everything goes into the Corrections file and is applied one at a time with the author's OK. Usage /rama:corrections print [5-7], /rama:corrections import <file.pdf>, /rama:corrections.
+description: Collect and apply the corrections the author makes while rereading a RAMA book away from the computer. Prints a review PDF with paragraph IDs in the margin (5.12 = chapter 5, paragraph 12), imports highlights and comments from the annotated PDF, or parses free-form notes (phone notes, dictation, photos of marked-up pages). Everything goes into the Corrections file and is applied one at a time with the author's OK. Usage /rama:corrections print [5-7], /rama:corrections import marked-up.pdf, /rama:corrections.
 ---
 
 # RAMA: Corrections

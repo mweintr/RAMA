@@ -9,6 +9,8 @@
    rama-<skill> and /rama:<x> usages changed to /rama-<x>, ready to upload
    in claude.ai under Settings > Capabilities > Skills.
 
+Stops first if any skill description contains < or >, which claude.ai rejects.
+
 Run from the repo root:  python3 scripts/build.py
 """
 import re
@@ -20,6 +22,19 @@ ROOT = Path(__file__).resolve().parent.parent
 SHARED = ROOT / 'shared'
 SKILLS = ROOT / 'skills'
 DIST = ROOT / 'dist' / 'claude-ai'
+
+
+def validate():
+    """claude.ai rejects a skill whose description contains anything that looks like an XML tag."""
+    bad = []
+    for f in sorted(SKILLS.glob('*/SKILL.md')):
+        m = re.search(r'^description:\s*(.*)$', f.read_text(encoding='utf-8'), flags=re.M)
+        if not m:
+            bad.append(f'{f.relative_to(ROOT)}: no description')
+        elif re.search(r'[<>]', m.group(1)):
+            bad.append(f'{f.relative_to(ROOT)}: description contains < or > (claude.ai reads it as an XML tag)')
+    if bad:
+        raise SystemExit('Build stopped:\n  ' + '\n  '.join(bad))
 
 
 def sync():
@@ -55,5 +70,6 @@ def package():
 
 
 if __name__ == '__main__':
+    validate()
     sync()
     package()
