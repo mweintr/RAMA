@@ -1,6 +1,6 @@
 ---
 name: character-interview
-description: Optional. Deep interview to build a character's psychology, behavior, contradictions and voice into a profile in characters/, which beats, compose, check and character-check all read. Uses what the story bible and manuscript already say, and asks only about the gaps. Run once per important character. Usage /rama:character-interview <Name>.
+description: Optional. Deep interview to build a character's psychology, behavior, contradictions and voice into a profile in characters/, which beats, compose, check and character-check all read. Uses what the story bible and manuscript already say, and asks only about the gaps. Run once per important character. Usage /rama:character-interview Keziah.
 ---
 
 # RAMA: Character Interview

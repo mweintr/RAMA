@@ -1,6 +1,6 @@
 ---
 name: character-check
-description: Optional. Checks that a character in a RAMA chapter behaves, speaks and knows things consistently with their profile in characters/, the story bible and their earlier scenes. Flags voice drift, behavior that contradicts them, and knowledge slips, then fixes drift with the author's approval. Complements /rama:check. Usage /rama:character-check 5 <Name>.
+description: Optional. Checks that a character in a RAMA chapter behaves, speaks and knows things consistently with their profile in characters/, the story bible and their earlier scenes. Flags voice drift, behavior that contradicts them, and knowledge slips, then fixes drift with the author's approval. Complements /rama:check. Usage /rama:character-check 5 Keziah.
 ---
 
 # RAMA: Character Check
