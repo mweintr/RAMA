@@ -39,6 +39,7 @@ answer in the RAMA Log.
 | Glyphs | `glyphs/` folder | for compile | `Chapter_head.png`, `divider.png` (optional per-break `divider<TAG>.png`). |
 | Characters | `characters/<Name>.md` | optional | Deep profiles from `character-interview`. |
 | Corrections | `<Title> — Corrections.md` | optional | Queue used by `corrections`. |
+| Brainstorm | `<Title> — Brainstorm.md` | created by brainstorm | One section per session: chosen, starred and struck ideas. |
 
 Other `.md` files in the folder (old style guides, research notes, sample
 chapters, earlier drafts) are **reference material**. Read them when they are
