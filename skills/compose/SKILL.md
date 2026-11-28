@@ -1,6 +1,6 @@
 ---
 name: compose
-description: Ghost-write one chapter of a RAMA book from its approved beats, following the style guide to the letter. Asks any remaining questions as a survey first, drafts the full chapter, self-checks it against the style guide's checklist, and adds it to the manuscript file once the author approves it. Usage /rama:compose 5. Run after /rama:beats 5.
+description: Ghost-write one chapter of a RAMA book from its approved beats, following the style guide to the letter. Asks any remaining questions as a survey first, drafts the full chapter into its own Claude Doc, self-checks it, runs /rama:check on it, then presents the Doc and adds the chapter to the manuscript file. Usage /rama:compose 5. Run after /rama:beats 5.
 ---
 
 # RAMA: Compose
@@ -57,7 +57,7 @@ Write the whole chapter in one pass, in the manuscript format from
   scenes, with no break before the first scene.
 - Hit the target length within ±10%.
 - Follow every beat, in order. If the prose needs a beat changed, change it,
-  and report the change in Step 5. Don't drop one silently.
+  and report the change in Step 7. Don't drop one silently.
 
 Prose discipline:
 - **The style guide wins** over your own habits, the outline's wording and
@@ -66,58 +66,106 @@ Prose discipline:
   Reread the register samples if the book has them.
 - Concrete and specific: names, objects, weather, tools and period detail
   from the bible and outline. Never invent a fact that contradicts the Ledger.
-  When you must invent one (a minor name, a distance), log it in Step 6.
+  When you must invent one (a minor name, a distance), log it in Step 8.
 - End on the image or line the beats give for *Ends on*.
 - Avoid the stock AI tells: not-X-but-Y contrasts, triads by reflex, one-line
   zingers closing paragraphs, staged openers, stacked em dashes, abstract
   emotional summary after a concrete moment, and "something shifted"
   vagueness. If the style guide has its own list, it covers these too.
 
-## Step 4: Self-check before showing
+## Step 4: Self-check
 
 Go through the draft against the style guide's **Revision Checklist** (or, if
 there is none, its stated rules) and against the beats. Fix what you find
-before showing the draft. Count anything the guide quantifies (em dashes per
-1,000 words, addresses to the reader per chapter). Don't show the author a
-draft you know breaks a rule.
+before going on. Count anything the guide quantifies (em dashes per 1,000
+words, addresses to the reader per chapter). Don't carry a draft you know
+breaks a rule into the next step.
 
-## Step 5: Present
+## Step 5: Chapter Doc
 
-Show the full chapter. Then a short note, no more than eight lines:
+Put the draft in its own **Claude Doc**, titled `<Title> - Chapter <n>`
+(e.g. *The Shape of the Sea - Chapter 6*), with the chapter heading exactly as
+it will stand in the manuscript and the full chapter text below it, scene
+breaks included. Create it through the docs skill or the Claude Docs connector
+(load its instructions first) and follow its rules for making a doc. This Doc
+is the working copy of the chapter until it goes into the manuscript.
 
-```
-Chapter 5 · 3,640 words (target 3,600) · 4 scenes
-Beats changed: 3.2 (Sharp names the boat, not Harold; the POV rule required it)
-New facts: Sharp's skiff is the *Ruth*; the landing is the north cove
-Checklist: passes. Em dashes 3 (quota 3)
-Open: none
-```
+- If a Doc with that title already exists from an earlier session (the RAMA
+  Log records it), update it in place when the author chose **Revise the
+  existing text**. For **Write a fresh draft to compare**, make a new Doc
+  titled `<Title> - Chapter <n> (new draft)` and leave the old one alone.
+- Record the Doc's link in the RAMA Log, Chapter Status, as soon as it exists.
+- If no docs tool is available, say so in one line and keep the draft as a
+  file instead: `<Title> - Chapter <n>.md` in the project folder, or in
+  outputs for a read-only Project. Every later step uses that file in place of
+  the Doc.
 
-Then ask with a survey: **Accept and add to manuscript / Revise (I'll say
-what) / Retune the voice (run /rama:retune).** Revise as many rounds as the
-author wants. Show only the changed passages after the first round, unless
-they ask for the whole chapter.
+Don't paste the chapter into chat at this stage. Say in one line that the Doc
+exists and that the check comes next.
 
-## Step 6: Save
+## Step 6: Check
 
-Once accepted:
+Run **`/rama:check <n>`** on the draft before the author sees it. Invoke the
+check skill (`Skill` tool in Claude Code / Cowork: `rama:check`; in claude.ai,
+the **rama-check** skill) and follow it in full, with these differences, which
+check's *Called from compose* section also states:
 
-1. **Manuscript**: insert the chapter into `<Title>.md` in outline order (after
-   chapter `n−1` and before `n+1`, if that exists), or replace the existing
-   chapter if the author chose revision. Create the manuscript with
-   `Title:` / `Author:` lines first if it doesn't exist.
-2. **RAMA Log**:
-   - Chapter Status → Draft `✓ <date>`, Words.
-   - Continuity Ledger → every new concrete fact this chapter establishes.
+- The chapter is not in the manuscript yet. Check reads it from the Chapter
+  Doc, and checks it against the manuscript chapters before it.
+- Every fix the author approves goes into the Chapter Doc, not the manuscript.
+- Check writes its report and Check History as usual, then hands back here
+  instead of closing out on its own.
+
+If the check skill isn't installed, run its passes yourself from the style
+guide, beats, Ledger and earlier chapters, and say so.
+
+## Step 7: Present and add to the manuscript
+
+Once the check is complete:
+
+1. **Present the Chapter Doc.** Open it for the author (or give its link).
+   Don't paste the full chapter into chat. Then a short note, no more than
+   eight lines:
+
+   ```
+   Chapter 5 · 3,640 words (target 3,600) · 4 scenes
+   Doc: The Shape of the Sea - Chapter 5
+   Beats changed: 3.2 (Sharp names the boat, not Harold; the POV rule required it)
+   New facts: Sharp's skiff is the *Ruth*; the landing is the north cove
+   Check: 9 findings, 8 fixed, 1 kept as intentional. Em dashes 3 (quota 3)
+   Open: none
+   ```
+
+2. **Add it to the manuscript.** Insert the chapter, exactly as it stands in
+   the Doc, into `<Title>.md` in outline order (after chapter `n−1` and before
+   `n+1`, if that exists), or replace the existing chapter if the author chose
+   revision. Create the manuscript with `Title:` / `Author:` lines first if it
+   doesn't exist. Strip anything the Doc carries that the manuscript format
+   forbids (comments, notes, word counts). In a read-only claude.ai Project,
+   write the full updated manuscript to outputs and say which Project file to
+   replace.
+
+Then ask with a survey: **Done / Revise (I'll say what) / Retune the voice
+(run /rama:retune).** Revise as many rounds as the author wants. Make each
+revision in the Chapter Doc and the manuscript together, so the two never
+differ, and report only the changed passages in chat. Every revised passage
+must pass the style guide.
+
+## Step 8: Update the log and beats
+
+1. **RAMA Log**:
+   - Chapter Status → Draft `✓ <date>`, Words, Last check `<date>`, Doc link.
+   - Continuity Ledger → every new concrete fact this chapter establishes,
+     including canonical values settled during the check.
    - Open Threads → mark payoffs and add threads opened.
-   - Decisions → any choice made in this step that changes the book.
-3. **Beats file**: if beats changed in drafting, update the chapter's beats to
+   - Decisions → any choice made in this skill that changes the book.
+2. **Beats file**: if beats changed in drafting, update the chapter's beats to
    match what was written and mark the changes `(Changed in compose)`.
 
-In a read-only claude.ai Project, write the full updated manuscript, RAMA Log
-and Beats file to outputs, and say which three Project files to replace.
+In a read-only claude.ai Project, write the full updated RAMA Log and Beats
+file to outputs too, and say which Project files to replace.
 
 Finish with:
 
-> Chapter <n> added to the manuscript ([W] words; book total [T] / [target]).
-> Next: `/rama:check <n>`, or `/rama:beats <n+1>`.
+> Chapter <n> checked and added to the manuscript ([W] words; book total [T] / [target]). Doc: <Title> - Chapter <n>.
+> Next: `/rama:beats <n+1>`.

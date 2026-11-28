@@ -1,6 +1,6 @@
 ---
 name: check
-description: Make a RAMA chapter tip-top. Checks style-guide compliance (every rule and the revision checklist), outline and beats compliance, continuity against the rest of the book and the story bible, timeline, character facts, period accuracy, and copy-editing. Writes a ranked report, then goes through the fixes one at a time, applying each only with the author's OK. Usage /rama:check 5, /rama:check 5-7, or /rama:check all.
+description: Make a RAMA chapter tip-top. Checks style-guide compliance (every rule and the revision checklist), outline and beats compliance, continuity against the rest of the book and the story bible, timeline, character facts, period accuracy, copy-editing, and repeated words and sentence rhythm. Writes a ranked report, then goes through the fixes one at a time, applying each only with the author's OK. Usage /rama:check 5, /rama:check 5-7, or /rama:check all.
 ---
 
 # RAMA: Check
@@ -16,10 +16,25 @@ Before starting, read `references/project-files.md` and `references/survey.md`.
 - `/rama:check 5`: one chapter, checked against everything before it.
 - `/rama:check 5-7`: a range, checked as a unit and against what comes before it.
 - `/rama:check all`: the whole manuscript as it stands.
-- Optional `--only style,outline,continuity,timeline,characters,accuracy,copy`
+- Optional `--only style,outline,continuity,timeline,characters,accuracy,copy,repetition,craft`
   to run some passes only.
 
 No argument: check the most recently composed chapter, and say which.
+
+## Called from compose
+
+`compose` runs this skill on a fresh chapter before the author sees it. The
+chapter is then in its **Chapter Doc** (`<Title> - Chapter <n>`, or the draft
+file compose names), not yet in the manuscript. In that case:
+
+- Step 1: read the chapter in scope from the Chapter Doc. Read the manuscript
+  for the chapters before it, as usual.
+- Step 4: apply every approved fix to the Chapter Doc. Don't touch the
+  manuscript.
+- Step 5: write the Check Report and Check History as usual, but don't save
+  the manuscript, don't set Last check in Chapter Status (compose does both
+  when it adds the chapter), and don't print the finish line. Hand back to
+  compose with a one-line tally: findings, fixed, intentional, skipped.
 
 ## Step 1: Read
 
@@ -91,10 +106,28 @@ punctuation consistency (quotes, dashes, ellipses, serial comma, numbers).
 Don't flag what the style guide deliberately mandates (period spellings,
 dialect).
 
-**8. Craft (`P`).** Things not covered by a rule that still weaken the
+**8. Repetition and rhythm (`R`).** *Adapted from ghost-writer's
+`proofread` (MIT, Simone Di Roma).* Measure these rather than judging by ear:
+- Any word used three or more times within 200 words. Leave out articles,
+  prepositions, pronouns, character names and terms the scene can't avoid.
+- The same sentence opening three or more times in a row ("She…", "The…",
+  "It was…").
+- The same transition or connective more than twice in the chapter ("Still,",
+  "Then", "And yet").
+- Rhythm: four or more consecutive sentences of about the same length, or a
+  paragraph whose sentences are all one length. Compare against the rhythm the
+  style guide describes. If it asks for short sentences, flag runs of long
+  ones, and the reverse.
+
+Report the count with each finding (`"weight" ×4 in 170 words, 5.8–5.10`).
+Don't flag repetition or rhythm the style guide calls for, or a deliberate
+echo the beats or a Decision set up. Fold an `R` finding into a `P` finding
+when both point at the same passage.
+
+**9. Craft (`P`).** Things not covered by a rule that still weaken the
 chapter: a scene that restates the previous one, an echoed word in close
-range, a paragraph that explains what the scene already showed, a slack
-opening, an ending that softens the closing image, and AI tells (not-X-but-Y,
+range that the `R` thresholds miss, a paragraph that explains what the scene
+already showed, a slack opening, an ending that softens the closing image, and AI tells (not-X-but-Y,
 reflexive triads, aphoristic closers, abstract emotional summary).
 
 ## Step 3: The report
@@ -111,7 +144,7 @@ one) and show it in chat:
 
 ```markdown
 # Check Report: Chapters 5–7 · 2026-11-20
-Passes: style, outline, continuity, timeline, characters, accuracy, copy, craft
+Passes: style, outline, continuity, timeline, characters, accuracy, copy, repetition, craft
 Findings: 14 (Critical 2 · Major 5 · Minor 7)
 Counts: em dashes ch5 3/3.6 · ch6 5/3.9 ✗ · addresses to reader ch5 1 · ch6 0 · ch7 1
 

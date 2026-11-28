@@ -20,8 +20,8 @@ by Simone Di Roma (MIT). Several of its editorial skills are adapted here.
 | `/rama:brainstorm` | Starting from nothing, or from a seed? RAMA offers a spread of premises, you star, strike and combine until one holds, then it saves the **Concept** file for config to build on. |
 | `/rama:config` | Finds and checks the project files and asks about gaps and contradictions. Builds any missing file by interview, or adapts an old style guide. Writes the **RAMA Log**. |
 | `/rama:beats 5` | Story beats for chapter 5, built on the outline **and** on what chapters 1–4 actually established. Surveys you first, then saves to the Beats file. |
-| `/rama:compose 5` | Writes chapter 5 from its beats, to the style guide, self-checks it against the guide's revision checklist, and adds it to the manuscript once you approve. |
-| `/rama:check 5` · `5-7` · `all` | Style guide, outline/beats, continuity, timeline, characters, period accuracy, copy and craft. Ranked report, then fixes one at a time with your OK. |
+| `/rama:compose 5` | Writes chapter 5 from its beats, to the style guide, into its own Claude Doc (*Title - Chapter 5*). Self-checks it, runs `/rama:check 5` on it, then presents the Doc and adds the chapter to the manuscript. |
+| `/rama:check 5` · `5-7` · `all` | Style guide, outline/beats, continuity, timeline, characters, period accuracy, copy, repeated words and rhythm, and craft. Ranked report, then fixes one at a time with your OK. |
 | `/rama:compile` | `.md` + `.docx` (via **manuscript-docx**) + `.epub` (via **manuscript-epub**). Uses the chapter-head and divider glyphs in `glyphs/`, and offers to draw them if they're missing. |
 
 ### Editorial extras (adapted from ghost-writer)
@@ -29,6 +29,7 @@ by Simone Di Roma (MIT). Several of its editorial skills are adapted here.
 | Command | What it does |
 |---|---|
 | `/rama:resume` | Where you left off, and the one next step. |
+| `/rama:help` | Every command by stage, with usage, and the next step for your book. |
 | `/rama:demolish 5` | Hostile read for story logic, motivation, stakes and POV cheats, one criticism at a time. |
 | `/rama:review 5 editor` / `all` | Persona reads: editor, target reader, hostile reader, period expert, out-of-target. |
 | `/rama:integrate 5` | Turns your answers from demolish/review into approved text changes. |
