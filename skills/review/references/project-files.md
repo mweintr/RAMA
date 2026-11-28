@@ -36,6 +36,7 @@ answer in the RAMA Log.
 | Manuscript | `<Title>.md` | once writing starts | **One file** holding every written chapter in order. RAMA's compose skill adds to it. |
 | Beats | `<Title> — Beats.md` | created by beats | One section per chapter: `## Chapter 5 — <chapter head>`. |
 | RAMA Log | `<Title> — RAMA Log.md` | created by config | Project state and RAMA's memory (see below). |
+| Chapter Docs | `<Title> - Chapter <n>` | created by compose | One Claude Doc per composed chapter, the working copy compose drafts in and check fixes. The manuscript holds the final text. The RAMA Log records each Doc's link. |
 | Glyphs | `glyphs/` folder | for compile | `Chapter_head.png`, `divider.png` (optional per-break `divider<TAG>.png`). |
 | Characters | `characters/<Name>.md` | optional | Deep profiles from `character-interview`. |
 | Corrections | `<Title> — Corrections.md` | optional | Queue used by `corrections`. |
@@ -127,8 +128,8 @@ Decisions here override the outline and story bible until those files are
 updated, and every skill must respect them.
 
 ## Chapter Status
-| # | Chapter head | Beats | Draft | Words | Last check |
-|---|---|---|---|---|---|
+| # | Chapter head | Beats | Draft | Words | Last check | Doc |
+|---|---|---|---|---|---|---|
 
 ## Continuity Ledger
 Concrete facts established in the written text that later chapters must keep:

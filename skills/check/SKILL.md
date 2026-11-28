@@ -21,6 +21,21 @@ Before starting, read `references/project-files.md` and `references/survey.md`.
 
 No argument: check the most recently composed chapter, and say which.
 
+## Called from compose
+
+`compose` runs this skill on a fresh chapter before the author sees it. The
+chapter is then in its **Chapter Doc** (`<Title> - Chapter <n>`, or the draft
+file compose names), not yet in the manuscript. In that case:
+
+- Step 1: read the chapter in scope from the Chapter Doc. Read the manuscript
+  for the chapters before it, as usual.
+- Step 4: apply every approved fix to the Chapter Doc. Don't touch the
+  manuscript.
+- Step 5: write the Check Report and Check History as usual, but don't save
+  the manuscript, don't set Last check in Chapter Status (compose does both
+  when it adds the chapter), and don't print the finish line. Hand back to
+  compose with a one-line tally: findings, fixed, intentional, skipped.
+
 ## Step 1: Read
 
 Say right away: `Checking <scope>: <passes>. Reading…`
